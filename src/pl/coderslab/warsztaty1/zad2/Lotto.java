@@ -14,13 +14,25 @@ public class Lotto {
         int[] tab = new int[6];
         System.out.println("Write down numbers between 1-49. Press Enter after write every number. " +
                 "Remember, every number must be only once.");
-        for (int i = 0; i < tab.length; i++) {
-            tab[i] = scan.nextInt();
-            while (tab[i] > 49 || tab[i] < 1) {
-                System.out.println("You wrote incorrect number. Please write down new number between 1-49.");
-                tab[i] = scan.nextInt();
-            }
-        }
+
+//        int index = 0;
+//        while (index < 6) {
+//            tab [index] = -1;
+//            while (!(tab[index] > 0 && tab[index] < 50)) {
+//                try {
+//                    tab[index] = Integer.parseInt(scan.nextLine());
+//                    while (tab[index] > 49 || tab[index] < 1) {
+//                        System.out.println("You wrote incorrect number. Please write down new number between 1-49.");
+//                        tab[index] = Integer.parseInt(scan.nextLine());
+//                    }
+//                } catch (NumberFormatException e) {
+//                    System.out.println("You didn't write a number! Try again:");
+//                }
+//            }
+//            index++;
+//        }
+
+        tabWithChosenNumber(tab);
 
         Arrays.sort(tab);
         int errors;
@@ -80,5 +92,20 @@ public class Lotto {
         }
     }
 
-
+    public static int [] tabWithChosenNumber (int [] tab) {
+        int index = 0;
+        while (!(tab[index] > 0 && tab[index] < 50)) {
+            try {
+                tab[index] = Integer.parseInt(scan.nextLine());
+                while (tab[index] > 49 || tab[index] < 1) {
+                    System.out.println("You wrote incorrect number. Please write down new number between 1-49.");
+                    tab[index] = Integer.parseInt(scan.nextLine());
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("You didn't write a number! Try again:");
+            }
+            index++;
+        }
+        return tab;
+    }
 }
