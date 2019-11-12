@@ -66,8 +66,10 @@ public class Lotto {
 
         int result = 0;
         for (int i = 0; i < tab.length; i++) {
-            if (tab[i] == drew[i]) {
-                result++;
+            for (int j = 0; j < tab.length; j++) {
+                if (tab[i] == drew[j]) {
+                    result++;
+                }
             }
         }
 
