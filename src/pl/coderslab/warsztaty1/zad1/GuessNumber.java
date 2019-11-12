@@ -7,24 +7,24 @@ public class GuessNumber {
     public static void main(String[] args) {
         Random r = new Random();
         int num = r.nextInt(100) + 1;
+        int max = 5;
+        int tryNumber = max;
 
-        System.out.println("Wylosowałem liczbę. Zganij, jaką?");
+        System.out.println("I drew a number between 1-100. Guess what? You have exactly " + max + " chances!");
 
         int writeNum = readNumber();
-        int max = 10;
-        int tryNumber = 10;
 
         while (writeNum != num) {
 
             if (writeNum > num) {
-                System.out.println("Podałeś za dużą liczbę!");
+                System.out.println("Your number is too big!");
                 tryNumber--;
-                System.out.println("Ilość prób, jaka Ci została: "+tryNumber);
+                System.out.println(tryNumber + " chances left.");
 
             } else if (writeNum < num) {
-                System.out.println("Podałeś za małą liczbę!");
+                System.out.println("Your number is too small!");
                 tryNumber--;
-                System.out.println("Ilość prób, jaka Ci została: "+tryNumber);
+                System.out.println(tryNumber + " chances left.");
 
             }
 
@@ -35,19 +35,25 @@ public class GuessNumber {
             }
         }
         if (writeNum == num) {
-            System.out.println("Brawo! Odgadłeś liczbę za " + (max - tryNumber + 1) + " razem!");
+            System.out.println("Congratulations! You wrote correct number in the " + (max - tryNumber + 1) + " time!");
         } else {
-            System.out.println("Przegrałeś!");
-            System.out.println("Prawidłowa odpowiedź to: " + num);
+            System.out.println("You lost the game!");
+            System.out.println("Correct answer is: " + num);
         }
     }
 
-    public static int readNumber () {
-        System.out.println("Podaj liczbę: ");
+    public static int readNumber() {
+        System.out.print("Write your number: ");
         Scanner scan = new Scanner(System.in);
-        while (!scan.hasNextLine()) {
-            System.out.println("Musisz podać liczbę!");
+        int num = -1;
+        while (!(num > 0)) {
+            try {
+                num = Integer.parseInt(scan.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Your number is incorrect!");
+                System.out.print("Write your number again: ");
+            }
         }
-        return scan.nextInt();
+        return num;
     }
 }
