@@ -4,11 +4,12 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        int wynik = rollDice("3D6+10");
-        System.out.println(wynik);
+        int finalScore = rollDice("D3-1");
+        System.out.println(finalScore);
     }
 
-    public static int rollDice (String dice) {
+
+    private static int rollDice(String dice) {
         int dIndex = dice.indexOf("D");
         String xStr = dice.substring(0, dIndex);
         int x = generateX(xStr);
@@ -18,7 +19,8 @@ public class Main {
         return generateNumber(x, y, z);
     }
 
-    public static int generateX(String xStr) {
+    //how many times the dice must be rolled
+    private static int generateX(String xStr) {
         if (xStr.equals("")){
             return  1;
         } else {
@@ -26,7 +28,8 @@ public class Main {
         }
     }
 
-    public static int generateY (String dice) {
+    //checked, how many walls has cube
+    private static int generateY(String dice) {
         if (dice.contains("+")) {
             int plusIndex = dice.indexOf("+");
             String yStr = dice.substring(0, plusIndex);
@@ -40,7 +43,8 @@ public class Main {
         }
     }
 
-    public static int generateZ (String dice) {
+    //checked, how many points must be added or subtracted after all rolls
+    private static int generateZ(String dice) {
         if (dice.contains("+")) {
             int plusIndex = dice.indexOf("+");
             String zStr = dice.substring(plusIndex+1);
@@ -54,7 +58,8 @@ public class Main {
         }
     }
 
-    public static int generateNumber (int x, int y, int z) {
+    //sum all rolls
+    private static int generateNumber(int x, int y, int z) {
         int result = 0;
         Random r = new Random();
         for (int i = 0; i < x; i++) {
